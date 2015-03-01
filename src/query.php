@@ -21,6 +21,7 @@ if(isset($_REQUEST["action"]))
 if(($_REQUEST["action"]=="run")){
 	$result = array();
 	try {
+		set_time_limit(15);
 		$command = $_REQUEST["query_text"];
 		$command = trim($command);
 		if($command!==''){
