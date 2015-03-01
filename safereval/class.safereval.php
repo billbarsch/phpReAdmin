@@ -75,17 +75,23 @@ class SaferEval {
 			array_pop($this->tokens);
 
 			$i = 0;
+			$test = $this->allowedVariables;
 			foreach ($this->tokens as $key => $token) {
 				$i++;
-                        	if (is_array($token)) {
+                if (is_array($token)) {
 					$id = token_name($token[0]);
 					switch ($id) {
-						case('T_VARIABLE'): 
-							if (in_array($token[1], $this->allowedVariables) === false) {
-                        					$this->errors[$i]['name'] = 'Illegal variable: ' . $token[1];
-                        					$this->errors[$i]['line'] = $token[2];
+						case('T_VARIABLE'):
+							if(sizeof($test)==0){
+								$this->allowedVariables[] = "$".$token[1];
+								//$this->globalVariables[] = $token[1];
+							}else{
+								if (in_array($token[1], $this->allowedVariables) === false) {
+												$this->errors[$i]['name'] = 'Illegal variable: ' . $token[1];
+												$this->errors[$i]['line'] = $token[2];
+								}
 							}
-							break;
+							break;					
 						case('T_STRING'):
 							if (in_array($token[1], $this->allowedCalls) === false) {
                         					$this->errors[$i]['name'] = 'Illegal function: ' . $token[1];
@@ -99,7 +105,7 @@ class SaferEval {
 							}
 							break;
 					}
-        			}
+        		}
 			}
 		}
 

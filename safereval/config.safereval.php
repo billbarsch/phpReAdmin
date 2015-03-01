@@ -8,7 +8,8 @@
 *
 */
 
-$allowedVariables = array(
+$allowedVariables = array();
+/*$allowedVariables = array(
 '$result',
 '$conn',
 '$a',
@@ -36,7 +37,9 @@ $allowedVariables = array(
 '$x',
 '$y',
 '$z');
-
+*/
+$globalVariables = array('conn','result');
+/*
 $globalVariables = array (
 	'result',
 	'conn',
@@ -66,7 +69,7 @@ $globalVariables = array (
 	'y',
 	'z'
 );
-
+*/
 $allowedCalls = array (
 	// Function Handling Functions
 //	'func_get_arg',		// Return an item from the argument list
