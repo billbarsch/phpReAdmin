@@ -1,7 +1,7 @@
 # phpReAdmin 0.1
-##A phpMyAdmin for Rethinkdb##
 
 ##PHP RethinkDB Admin##
+phpMyAdmin for Rethinkdb
 
 ###This project can:###
 - Create/drop Rethinkdb Databases
