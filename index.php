@@ -1,8 +1,4 @@
 <?php
-include "config.php";
-include "src/connect_db.php";
-
-
 /********************utils******************/
 function indent($json) {
 
@@ -55,8 +51,20 @@ function indent($json) {
     return $result;
 }
 //******************utils***********************
+session_start();
 
+if(isset($_REQUEST["action"]))
+if($_REQUEST["action"]=="config"){
+	$_SESSION["host_address"] = $_REQUEST["host_address"];
+}
 
+if(isset($_REQUEST["action"]))
+if($_REQUEST["action"]=="disconnect"){
+	$_SESSION["host_address"] = '';
+}
+
+include "config.php";
+include "src/connect_db.php";
 
 if(!isset($_REQUEST["database"]))
 	$_REQUEST["database"] = '';
@@ -85,18 +93,23 @@ if(!isset($_REQUEST["action"]))
           <a class="navbar-brand" href="<?php echo $_SERVER['PHP_SELF'];?>">phpReAdmin (0.1)</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-left">
             <li><a href="<?php echo $_SERVER['PHP_SELF'];?>">Databases</a></li>
             <li class="<?php if($_REQUEST["database"]=='') echo "disabled";?>"><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>">Tables</a></li>
             <li class="<?php if($_REQUEST["table"]=='') echo "disabled";?>"><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>">Docs</a></li>
             <li><a href="<?php echo $_SERVER['PHP_SELF'];?>?query=true">Query</a></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="<?php echo $_SERVER['PHP_SELF'];?>?action=disconnect">Exit</a></li>
+          </ul>
         </div>
       </div>
     </nav>
-
     <div class="container-fluid">
       <div class="row">
+<?php
+if($_SESSION["host_address"]!==''){   
+?>   
         <div class="col-sm-3 col-md-2 sidebar">
             <div class="panel-group" role="tablist">
                 <div class="panel panel-default">
@@ -124,13 +137,18 @@ if(!isset($_REQUEST["action"]))
                 </div>
               </div>
         </div>
+<?php
+}
+?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
  		<?php
 		$to_include = "databases.php";
 		
-		if(!$_REQUEST["database"]==''){
+		if($_REQUEST["database"]!=''){
 			if(($_REQUEST["action"]=="drop_database")
-			or($_REQUEST["action"]=="new_database")){
+			or($_REQUEST["action"]=="new_database")
+			or($_REQUEST["action"]=="config")
+			or($_REQUEST["action"]=="disconnect")){
 				$to_include = "databases.php";
 			}else{
 				$to_include = "tables.php";

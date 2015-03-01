@@ -14,7 +14,7 @@ if($_REQUEST["action"]=="delete_doc"){
     }
 }
 ?>
-         <h1 class="page-header">Docs (<?php echo $_REQUEST["table"];?>)</h1>
+         <h1 class="page-header"><?php echo $_REQUEST["database"];?>/<?php echo $_REQUEST["table"];?>/Docs</h1>
           <!-- <h2 class="sub-header"></h2> -->
           <a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=new" class="btn btn-primary" role="button">+ new doc</a>
           <div class="table-responsive">

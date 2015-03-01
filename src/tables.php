@@ -53,7 +53,7 @@ if($_REQUEST["action"]=="drop_table"){
           </div>
         </div>
 
-         <h1 class="page-header">Tables (<?php echo $_REQUEST["database"];?>)</h1>
+         <h1 class="page-header"><?php echo $_REQUEST["database"];?>/Tables</h1>
           <!-- <h2 class="sub-header"></h2> -->
          <a data-toggle="modal" data-target="#myModal" class="btn btn-primary" role="button">+ new table</a>
           <div class="table-responsive">
