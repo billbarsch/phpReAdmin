@@ -82,7 +82,7 @@ if(!isset($_REQUEST["action"]))
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="<?php echo $_SERVER['PHP_SELF'];?>">phpReAdmin (beta)</a>
+          <a class="navbar-brand" href="<?php echo $_SERVER['PHP_SELF'];?>">phpReAdmin (0.1)</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">

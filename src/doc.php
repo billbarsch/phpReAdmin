@@ -66,5 +66,5 @@ else
     <label for="json_text">json</label>
     <textarea rows="19" name="json_text" class="form-control" id="json_text" placeholder="{...}"><?php echo indent($json_text); ?></textarea>
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-default">Update</button>
 </form>
