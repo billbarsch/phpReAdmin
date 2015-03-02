@@ -84,6 +84,8 @@ if(!isset($_REQUEST["action"]))
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="bootstrap/dashboard.css" rel="stylesheet">
+    <script src="bootstrap/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -157,7 +159,8 @@ if($_SESSION["host_address"]!==''){
 		
 		if(!$_REQUEST["table"]==''){
 			if(($_REQUEST["action"]=="drop_table")
-			or($_REQUEST["action"]=="new_table")){
+			or($_REQUEST["action"]=="new_table")
+			or($_REQUEST["action"]=="rename_table")){
 				$to_include = "tables.php";
 			}else{
 				$to_include = "docs.php";
@@ -179,8 +182,5 @@ if($_SESSION["host_address"]!==''){
         </div>
       </div>
     </div>
-
-    <script src="bootstrap/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
