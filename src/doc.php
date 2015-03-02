@@ -42,7 +42,7 @@ if(isset($_REQUEST["doc"]))
 if($_REQUEST["doc"]!=="new")
 	$action = "update";
 ?>
-<h1 class="page-header"><?php echo $_REQUEST["table"];?></h1>
+<h1 class="page-header"><?php echo $_REQUEST["database"];?>/<?php echo $_REQUEST["table"];?></h1>
 <h3>
 <?php
 if($action=="insert"){
@@ -55,7 +55,7 @@ if($action=="insert"){
 $json_text = "";
 if($action=="update"){
 	$doc = r\db($_REQUEST["database"])->table($_REQUEST["table"])->get($_REQUEST["doc"])->run($conn);
-	$json_text = json_encode($doc->toNative(),JSON_UNESCAPED_UNICODE);
+	$json_text = json_encode($doc->toNative(),JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 	$doc = $doc->toNative();
 }
 ?>
