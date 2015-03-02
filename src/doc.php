@@ -1,9 +1,10 @@
 <?php
 if(isset($_REQUEST["action"]))
 if(($_REQUEST["action"]=="update")){
-	$json_array = json_decode($_REQUEST["json_text"]);
-//	unset($json_array["id"]);
-	$update = r\db($_REQUEST["database"])->table($_REQUEST["table"])->get($_REQUEST["doc"])->update($json_array)->run($conn);
+	$json_string = $_REQUEST["json_text"];
+	$json_array = json_decode($json_string);
+	//	unset($json_array["id"]);
+	$update = r\db($_REQUEST["database"])->table($_REQUEST["table"])->get($_REQUEST["doc"])->replace($json_array)->run($conn);
 	$update = $update->toNative();
 	if($update["replaced"]>0){
 		?>
@@ -18,7 +19,9 @@ if(($_REQUEST["action"]=="update")){
 
 if(isset($_REQUEST["action"]))
 if($_REQUEST["action"]=="insert"){
-	$json_array = json_decode($_REQUEST["json_text"]);
+	//$json_string = utf8_encode($_REQUEST["json_text"]); // before json_decode
+	$json_string = $_REQUEST["json_text"];
+	$json_array = json_decode($json_string);
 //	unset($json_array["id"]);
 	$insert = r\db($_REQUEST["database"])->table($_REQUEST["table"])->insert($json_array)->run($conn);
 	$insert = $insert->toNative();
@@ -52,7 +55,7 @@ if($action=="insert"){
 $json_text = "";
 if($action=="update"){
 	$doc = r\db($_REQUEST["database"])->table($_REQUEST["table"])->get($_REQUEST["doc"])->run($conn);
-	$json_text = json_encode($doc->toNative());
+	$json_text = json_encode($doc->toNative(),JSON_UNESCAPED_UNICODE);
 	$doc = $doc->toNative();
 }
 ?>
@@ -66,5 +69,5 @@ else
     <label for="json_text">json</label>
     <textarea rows="19" name="json_text" class="form-control" id="json_text" placeholder="{...}"><?php echo indent($json_text); ?></textarea>
   </div>
-  <button type="submit" class="btn btn-default">Update</button>
+  <button type="submit" class="btn btn-default">Replace</button>
 </form>

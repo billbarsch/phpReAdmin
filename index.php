@@ -76,9 +76,9 @@ if(!isset($_REQUEST["action"]))
 	$_REQUEST["action"] = "";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>phpReAdmin</title>
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
