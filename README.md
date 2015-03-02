@@ -6,9 +6,9 @@ now online at: www.phpreadmin.tk !!
 phpMyAdmin for Rethinkdb
 
 ###This project can:###
-- Create/drop Rethinkdb Databases
-- Create/drop Rethinkdb Tables
-- Create/delete Rethinkdb Docs (rows)
+- Create/Drop Rethinkdb Databases
+- Create/Rename/Drop Rethinkdb Tables
+- Create/Update/Delete Rethinkdb Docs (rows)
 - Execute Rethinkdb php Querys
 
 ###Uses:###
