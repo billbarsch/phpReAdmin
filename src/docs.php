@@ -34,7 +34,7 @@ if($_REQUEST["action"]=="delete_doc"){
                 foreach($docs as $doc){
 				?>
                 <tr>
-                  <td><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php echo $doc["id"];?>"><?php echo substr(json_encode($doc),0,100);?></a></td>
+                  <td><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php echo $doc["id"];?>"><?php echo substr(json_encode($doc,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),0,100);?></a></td>
                   <td><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php echo $doc["id"];?>&action=delete_doc" class="btn btn-danger" role="button">delete</a></td>
                   <td></td>
                 </tr>
