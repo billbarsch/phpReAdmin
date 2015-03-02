@@ -42,14 +42,14 @@ if(isset($_REQUEST["doc"]))
 if($_REQUEST["doc"]!=="new")
 	$action = "update";
 ?>
-<h1 class="page-header">
+<h1 class="page-header"><?php echo $_REQUEST["table"];?></h1>
+<h3>
 <?php
 if($action=="insert"){
 	?>New Doc<?php
 }else{
 	?>Doc (<?php echo $_REQUEST["doc"];?>)<?php
-}?>
-</h1>
+}?></h3>
 <!-- <h2 class="sub-header"></h2> -->
 <?php
 $json_text = "";
