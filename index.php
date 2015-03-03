@@ -99,7 +99,18 @@ if(!isset($_REQUEST["action"]))
             <li><a href="<?php echo $_SERVER['PHP_SELF'];?>">Databases</a></li>
             <li class="<?php if($_REQUEST["database"]=='') echo "disabled";?>"><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>">Tables</a></li>
             <li class="<?php if($_REQUEST["table"]=='') echo "disabled";?>"><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>">Docs</a></li>
-            <li><a href="<?php echo $_SERVER['PHP_SELF'];?>?query=true">Query</a></li>
+            <?php 
+            if((isset($_REQUEST["database"]))
+			and($_REQUEST["database"]!='')){ 
+				?>
+	            <li><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&query=true">Query</a></li>			
+	            <?php 
+			}else{
+				?>
+	            <li><a href="<?php echo $_SERVER['PHP_SELF'];?>?query=true">Query</a></li>
+				<?php
+			}
+			?>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="<?php echo $_SERVER['PHP_SELF'];?>?action=disconnect">Exit</a></li>
@@ -174,6 +185,7 @@ if($_SESSION["host_address"]!==''){
 				$to_include = "doc.php";
 			}
 		}
+		
 		if(isset($_REQUEST["query"]))
 			$to_include = "query.php";
 		
