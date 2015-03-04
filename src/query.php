@@ -5,9 +5,21 @@ include("safereval/config.safereval.php");
 if(!isset($_REQUEST["query_text"]))
 	$_REQUEST["query_text"] = "";
 ?>
+<script>
+$(function(){
+	$(document).on("dblclick",".query_history",function(){
+		$("#query_text").val($(this).val());
+		$("#history_modal").modal("hide");
+	})
+})	
+</script>
+
 <h1 class="page-header">
 PHP Query:
 </h1>
+<div style="text-align: right;">
+<a data-toggle="modal" data-target="#history_modal" class="btn btn-primary" role="button">query history</a>
+</div>
 <!-- <h2 class="sub-header"></h2> -->
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?<?php if(isset($_REQUEST["database"])){ echo "database=".$_REQUEST["database"]."&"; }?>query=true&action=run">
 <?php 
@@ -39,6 +51,9 @@ if(($_REQUEST["action"]=="run")){
 		$command = trim($command);
 		if($command!==''){
 			
+			//save query on memory
+			$_SESSION["query_history"][] = $command;
+			
 			//use default user db connection 	
 			if(isset($_REQUEST["use_db"]))
 			$conn->useDb($_REQUEST["database"]);
@@ -67,3 +82,36 @@ if(($_REQUEST["action"]=="run")){
 	}
 }
 ?>
+
+<!-- query history modal -->
+        <div class="modal fade" id="history_modal" role="dialog" aria-labelledby="history_modalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="history_modalLabel">Query History</h4>
+              </div>
+              <div class="modal-body">
+       			<ul class="nav nav-pills nav-stacked">
+				<?php
+				$history=array_reverse($_SESSION["query_history"]);
+				$history_index = 0;
+				foreach($history as $query){
+					$rows = "10";
+					if($history_index>0)
+						$rows = "6";
+					if($history_index>6)
+						$rows = "3";
+					
+					?>
+					<li title="Double click to transfer" role="presentation"><textarea rows="<?php echo $rows;?>" class="query_history form-control"><?php echo $query;?></textarea></li>
+					<?php
+				$history_index++;
+				}
+				?>
+				</ul>	
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- query history modal -->
