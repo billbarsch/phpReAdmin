@@ -94,19 +94,21 @@ if(($_REQUEST["action"]=="run")){
               <div class="modal-body">
        			<ul class="nav nav-pills nav-stacked">
 				<?php
-				$history=array_reverse($_SESSION["query_history"]);
-				$history_index = 0;
-				foreach($history as $query){
-					$rows = "10";
-					if($history_index>0)
-						$rows = "6";
-					if($history_index>6)
-						$rows = "3";
-					
-					?>
-					<li title="Double click to transfer" role="presentation"><textarea rows="<?php echo $rows;?>" class="query_history form-control"><?php echo $query;?></textarea></li>
-					<?php
-				$history_index++;
+				if(isset($_SESSION["query_history"])){
+					$history=array_reverse($_SESSION["query_history"]);
+					$history_index = 0;
+					foreach($history as $query){
+						$rows = "10";
+						if($history_index>0)
+							$rows = "6";
+						if($history_index>6)
+							$rows = "3";
+						
+						?>
+						<li title="Double click to transfer" role="presentation"><textarea rows="<?php echo $rows;?>" class="query_history form-control"><?php echo $query;?></textarea></li>
+						<?php
+					$history_index++;
+					}
 				}
 				?>
 				</ul>	
