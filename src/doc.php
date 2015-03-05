@@ -59,6 +59,38 @@ if($action=="update"){
 	$doc = $doc->toNative();
 }
 ?>
+<style>
+	.valid{
+		padding-left: 5px;
+		padding-right: 5px;		
+		background-color: #9F9;
+	}
+	.invalid{
+		background-color: #F99!important;
+	}
+</style>
+<script>
+	$(function(){
+		setInterval(function(){
+			$.ajax({
+			  type: "POST",
+			  url: "src/check_json.php",
+			  data: { json_text: $("#json_text").val() }
+			})
+			  .done(function(result) {
+			    json = JSON.parse(result);
+			  	//console.log(json);
+			    if((typeof json.valid_json!="undefined")&&(json.valid_json==true)){
+			    	$("#valid_label").removeClass("invalid");			    	
+			    	$("#valid_label").html("valid");			    	
+			    }else{
+			     	$("#valid_label").addClass("invalid");			    	
+			    	$("#valid_label").html("invalid");			    	
+			    }
+			});
+		},3000);
+	});
+</script>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php 
 if($action=="update")
 	echo $doc["id"];
@@ -68,6 +100,9 @@ else
   <div class="form-group">
     <label for="json_text">json</label>
     <textarea rows="19" name="json_text" class="form-control" id="json_text" placeholder="{...}"><?php echo $json_text; ?></textarea>
+  	<div style="text-align: right;">
+  	<span id="valid_label" class="valid">valid</span>
+ 	</div>
   </div>
   <button type="submit" class="btn btn-default">Replace</button>
 </form>
