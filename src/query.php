@@ -74,7 +74,7 @@ if(($_REQUEST["action"]=="run")){
 				$result = $result->toNative();
 			}
 			?>
-			<pre><?php echo indent(json_encode($result));?></pre>
+			<pre><?php echo json_encode($result,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);?></pre>
 			<?php
 		}
     } catch (Exception $e) {

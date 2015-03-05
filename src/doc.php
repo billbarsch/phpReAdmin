@@ -55,7 +55,7 @@ if($action=="insert"){
 $json_text = "";
 if($action=="update"){
 	$doc = r\db($_REQUEST["database"])->table($_REQUEST["table"])->get($_REQUEST["doc"])->run($conn);
-	$json_text = json_encode($doc->toNative(),JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+	$json_text = json_encode($doc->toNative(),JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES| JSON_PRETTY_PRINT);
 	$doc = $doc->toNative();
 }
 ?>
@@ -67,7 +67,7 @@ else
 ?>&action=<?php echo $action;?>">
   <div class="form-group">
     <label for="json_text">json</label>
-    <textarea rows="19" name="json_text" class="form-control" id="json_text" placeholder="{...}"><?php echo indent($json_text); ?></textarea>
+    <textarea rows="19" name="json_text" class="form-control" id="json_text" placeholder="{...}"><?php echo $json_text; ?></textarea>
   </div>
   <button type="submit" class="btn btn-default">Replace</button>
 </form>
