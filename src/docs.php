@@ -32,7 +32,7 @@ if($_REQUEST["action"]=="delete_doc"){
 					$result = array();
 					foreach(array_keys($array) as $key){
 						if(is_array($array[$key])||is_object($array[$key])){
-							//nada
+							$result[$key] = "{..}";
 						}else{
 							$result[$key] = $array[$key];
 						}
