@@ -1,4 +1,4 @@
-# phpReAdmin 0.2.9
+# phpReAdmin 0.3
 
 now online at: www.phpreadmin.tk !!
 
@@ -8,7 +8,7 @@ phpMyAdmin for Rethinkdb
 ###This project can:###
 - Create/Drop Rethinkdb Databases
 - Create/Rename/Drop Rethinkdb Tables
-- Create/Update/Delete Rethinkdb Docs (rows)
+- Create/Update/Delete Rethinkdb Docs (realtime json validation check!)
 - Execute Rethinkdb php Querys (with query history!)
 
 ###Uses:###
