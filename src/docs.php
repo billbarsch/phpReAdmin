@@ -44,7 +44,7 @@ if($_REQUEST["action"]=="delete_doc"){
                 foreach($docs as $doc){
 					$doc = first_keys($doc);
                 	$doc_text = json_encode($doc,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-					$doc_text = substr($doc_text,0,100);
+					$doc_text = substr(str_replace('"{..}"','{..}',$doc_text),0,100);
 					?>
 	                <tr>
 	                  <td><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php echo $doc["id"];?>"><?php echo $doc_text;?></a></td>
