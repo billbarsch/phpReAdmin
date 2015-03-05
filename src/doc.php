@@ -70,26 +70,30 @@ if($action=="update"){
 	}
 </style>
 <script>
-	$(function(){
-		setInterval(function(){
-			$.ajax({
-			  type: "POST",
-			  url: "src/check_json.php",
-			  data: { json_text: $("#json_text").val() }
-			})
-			  .done(function(result) {
-			    json = JSON.parse(result);
-			  	//console.log(json);
-			    if((typeof json.valid_json!="undefined")&&(json.valid_json==true)){
-			    	$("#valid_label").removeClass("invalid");			    	
-			    	$("#valid_label").html("valid");			    	
-			    }else{
-			     	$("#valid_label").addClass("invalid");			    	
-			    	$("#valid_label").html("invalid");			    	
-			    }
-			});
-		},3000);
+function check_json(){
+	$.ajax({
+	  type: "POST",
+	  url: "src/check_json.php",
+	  data: { json_text: $("#json_text").val() }
+	})
+	  .done(function(result) {
+	    json = JSON.parse(result);
+	  	//console.log(json);
+	    if((typeof json.valid_json!="undefined")&&(json.valid_json==true)){
+	    	$("#valid_label").removeClass("invalid");			    	
+	    	$("#valid_label").html("valid");			    	
+	    }else{
+	     	$("#valid_label").addClass("invalid");			    	
+	    	$("#valid_label").html("invalid");			    	
+	    }
+		setTimeout(check_json(),2000);	    
 	});
+}
+
+$(function(){
+	check_json();
+});
+	
 </script>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php 
 if($action=="update")
