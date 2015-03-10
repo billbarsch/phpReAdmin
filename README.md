@@ -12,8 +12,8 @@ phpMyAdmin for Rethinkdb
 - Execute Rethinkdb php Querys (with query history!)
 
 ###Uses:###
-Bootstrap (design)
-PHP-RQL (db connection)
+- Bootstrap (design)
+- PHP-RQL https://github.com/danielmewes/php-rql by Daniel Mewes
 
 
 ###License: FREE!###
