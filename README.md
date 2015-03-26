@@ -1,6 +1,4 @@
-# phpReAdmin 0.3
-
-now online at: www.phpreadmin.tk !!
+# phpReAdmin 0.3.1
 
 ##PHP RethinkDB Admin##
 phpMyAdmin for Rethinkdb

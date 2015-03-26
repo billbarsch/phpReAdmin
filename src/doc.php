@@ -86,7 +86,7 @@ function check_json(){
 	     	$("#valid_label").addClass("invalid");			    	
 	    	$("#valid_label").html("invalid");			    	
 	    }
-		setTimeout(check_json(),2000);	    
+		setTimeout(check_json(),2500);	    
 	});
 }
 
