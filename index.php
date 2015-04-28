@@ -1,15 +1,16 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 session_start();
 
 if(isset($_REQUEST["action"]))
-if($_REQUEST["action"]=="config"){
-	$_SESSION["host_address"] = $_REQUEST["host_address"];
-}
+	if($_REQUEST["action"]=="config"){
+		$_SESSION["host_address"] = $_REQUEST["host_address"];
+	}
 
 if(isset($_REQUEST["action"]))
-if($_REQUEST["action"]=="disconnect"){
-	$_SESSION["host_address"] = '';
-}
+	if($_REQUEST["action"]=="disconnect"){
+		$_SESSION["host_address"] = '';
+	}
 
 include "config.php";
 include "src/connect_db.php";
@@ -85,7 +86,7 @@ if($_SESSION["host_address"]!==''){
                     <ul class="list-group">
                     <?php
 					$databases = r\dbList()->run($conn);
-					$databases = $databases->toNative();
+					//$databases = $databases->toNative();
 					foreach($databases as $database){
 					?>
                     	<li class="list-group-item"><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $database;?>"><?php echo $database;?></a></li>

@@ -1,12 +1,12 @@
 <?php
 // Load the driver
-require_once("rdb/rdb.php");
+require_once("rdb2/rdb.php");
 try{
-	// Connect to localhost
-	if($_SESSION["host_address"]!='')
-	@ $conn = r\connect($_SESSION["host_address"]);
+	// Connect to host
+	if(!empty($_SESSION["host_address"]))
+		@ $conn = r\connect($_SESSION["host_address"]);
 } catch (Exception $e){ 
-	if(!isset($conn)){
+	if(empty($conn)){
 		$_SESSION["host_address"]='';
 		//die("error");
 	}
