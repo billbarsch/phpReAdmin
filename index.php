@@ -106,7 +106,7 @@ if($_SESSION["host_address"]!==''){
  		<?php
 		$to_include = "databases.php";
 		
-		if($_REQUEST["database"]!=''){
+		if($_REQUEST["database"]!==''){
 			if(($_REQUEST["action"]=="drop_database")
 			or($_REQUEST["action"]=="new_database")
 			or($_REQUEST["action"]=="config")
@@ -117,7 +117,7 @@ if($_SESSION["host_address"]!==''){
 			}	
 		}
 		
-		if(!$_REQUEST["table"]==''){
+		if($_REQUEST["table"]!==''){
 			if(($_REQUEST["action"]=="drop_table")
 			or($_REQUEST["action"]=="new_table")
 			or($_REQUEST["action"]=="rename_table")){
@@ -127,12 +127,13 @@ if($_SESSION["host_address"]!==''){
 			}
 		}
 
-		if(!$_REQUEST["doc"]==''){
+		if($_REQUEST["doc"]!==""){
 			if($_REQUEST["action"]=="delete_doc"){
 				$to_include = "docs.php";
 			}else{
 				$to_include = "doc.php";
 			}
+			
 		}
 		
 		if(isset($_REQUEST["query"]))

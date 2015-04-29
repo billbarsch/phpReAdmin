@@ -2,7 +2,7 @@
 if(isset($_REQUEST["action"]))
 if($_REQUEST["action"]=="rename_table"){
 	$rename_table = r\db($_REQUEST["database"])->table($_REQUEST["old_table_name"])->config()->update(array("name"=>$_REQUEST["new_table_name"]))->run($conn);
-	$rename_table = $rename_table->toNative();
+	//$rename_table = $rename_table->toNative();
 	if($rename_table["replaced"]>0){
 		?>
 		<p class="bg-success">Table renamed successfully!</p>
@@ -17,7 +17,7 @@ if($_REQUEST["action"]=="rename_table"){
 if(isset($_REQUEST["action"]))
 if($_REQUEST["action"]=="new_table"){
 	$new_table = r\db($_REQUEST["database"])->tableCreate($_REQUEST["table_name"])->run($conn);
-	$new_table = $new_table->toNative();
+	//$new_table = $new_table->toNative();
 	if($new_table["tables_created"]>0){
 		?>
 		<p class="bg-success">Table created successfully!</p>
@@ -32,7 +32,7 @@ if($_REQUEST["action"]=="new_table"){
 if(isset($_REQUEST["action"]))
 if($_REQUEST["action"]=="drop_table"){
 	$drop_table = r\db($_REQUEST["database"])->tableDrop($_REQUEST["table"])->run($conn);
-	$drop_table = $drop_table->toNative();
+	//$drop_table = $drop_table->toNative();
 	if($drop_table["tables_dropped"]>0){
 		?>
 		<p class="bg-success">Table dropped successfully!</p>
@@ -118,7 +118,7 @@ $(function(){
               <tbody>
 				<?php
                 $tables = r\db($_REQUEST["database"])->tableList()->run($conn);
-                $tables = $tables->toNative();
+                //$tables = $tables->toNative();
                 foreach($tables as $table){
                 ?>
                 <tr>

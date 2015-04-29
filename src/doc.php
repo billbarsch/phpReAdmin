@@ -5,7 +5,7 @@ if(($_REQUEST["action"]=="update")){
 	$json_array = json_decode($json_string);
 	//	unset($json_array["id"]);
 	$update = r\db($_REQUEST["database"])->table($_REQUEST["table"])->get($_REQUEST["doc"])->replace($json_array)->run($conn);
-	$update = $update->toNative();
+	//$update = $update->toNative();
 	if($update["replaced"]>0){
 		?>
 		<p class="bg-success">Doc updated successfully!</p>
@@ -24,7 +24,7 @@ if($_REQUEST["action"]=="insert"){
 	$json_array = json_decode($json_string);
 //	unset($json_array["id"]);
 	$insert = r\db($_REQUEST["database"])->table($_REQUEST["table"])->insert($json_array)->run($conn);
-	$insert = $insert->toNative();
+	//$insert = $insert->toNative();
 	if($insert["inserted"]>0){
 		?>
 		<p class="bg-success">Doc inserted successfully!</p>
@@ -55,8 +55,8 @@ if($action=="insert"){
 $json_text = "";
 if($action=="update"){
 	$doc = r\db($_REQUEST["database"])->table($_REQUEST["table"])->get($_REQUEST["doc"])->run($conn);
-	$json_text = json_encode($doc->toNative(),JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES| JSON_PRETTY_PRINT);
-	$doc = $doc->toNative();
+	//$doc = $doc->toNative();
+	$json_text = json_encode($doc,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES| JSON_PRETTY_PRINT);
 }
 ?>
 <style>

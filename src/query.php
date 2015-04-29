@@ -42,11 +42,19 @@ and($_REQUEST["database"]!='')){
 </form>
 
 <?php
+function is_assoc($array) {
+  foreach (array_keys($array) as $k => $v) {
+    if ($k !== $v)
+      return true;
+  }
+  return false;
+}
+
 if(isset($_REQUEST["action"]))
 if(($_REQUEST["action"]=="run")){
 	$result = array();
 	try {
-		set_time_limit(15);
+		set_time_limit(30);
 		$command = $_REQUEST["query_text"];
 		$command = trim($command);
 		if($command!==''){
@@ -56,7 +64,7 @@ if(($_REQUEST["action"]=="run")){
 			
 			//use default user db connection 	
 			if(isset($_REQUEST["use_db"]))
-			$conn->useDb($_REQUEST["database"]);
+				$conn->useDb($_REQUEST["database"]);
 				
 			//#################EVAL###################	
 			//I'm having problems using safereval 
@@ -70,11 +78,19 @@ if(($_REQUEST["action"]=="run")){
 			eval($command);
 			//########################################
 			
-			if(method_exists($result,"toNative")){
+			/*if(method_exists($result,"toNative")){
 				$result = $result->toNative();
+			}*/
+			$resultArray = [];
+			if(is_a($result,"ArrayObject")){
+				$resultArray = $result;
+			}else{
+				foreach ($result as $value) {
+					$resultArray[] = $value; 
+				}
 			}
 			?>
-			<pre><?php echo json_encode($result,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);?></pre>
+			<pre><?php echo json_encode($resultArray,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);?></pre>
 			<?php
 		}
     } catch (Exception $e) {

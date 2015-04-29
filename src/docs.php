@@ -2,7 +2,7 @@
 if(isset($_REQUEST["action"]))
 if($_REQUEST["action"]=="delete_doc"){
 	$delete = r\db($_REQUEST["database"])->table($_REQUEST["table"])->get($_REQUEST["doc"])->delete()->run($conn);
-	$delete = $delete->toNative();
+	//$delete = $delete->toNative();
 	if($delete["deleted"]>0){
 		?>
 		<p class="bg-success">Doc deleted successfully!</p>
@@ -30,7 +30,7 @@ if($_REQUEST["action"]=="delete_doc"){
 				<?php
 				function first_keys($array){
 					$result = array();
-					foreach(array_keys($array) as $key){
+					foreach(array_keys((array) $array) as $key){
 						if(is_array($array[$key])||is_object($array[$key])){
 							$result[$key] = "{..}";
 						}else{
@@ -40,7 +40,7 @@ if($_REQUEST["action"]=="delete_doc"){
 					return $result;
 				}//first keys
                 $docs = r\db($_REQUEST["database"])->table($_REQUEST["table"])->run($conn);
-				$docs = $docs->toNative();
+				//$docs = $docs->toNative();
                 foreach($docs as $doc){
 					$doc = first_keys($doc);
                 	$doc_text = json_encode($doc,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

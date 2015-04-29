@@ -2,7 +2,7 @@
 if(isset($_REQUEST["action"]))
 if($_REQUEST["action"]=="new_database"){
 	$new_database = r\dbCreate($_REQUEST["database_name"])->run($conn);
-	$new_database = $new_database->toNative();
+	//$new_database = $new_database->toNative();
 	if($new_database["dbs_created"]>0){
 		?>
 		<p class="bg-success">Database created successfully!</p>
@@ -17,7 +17,7 @@ if($_REQUEST["action"]=="new_database"){
 if(isset($_REQUEST["action"]))
 if($_REQUEST["action"]=="drop_database"){
 	$drop_database = r\dbDrop($_REQUEST["database"])->run($conn);
-	$drop_database = $drop_database->toNative();
+	//$drop_database = $drop_database->toNative();
 	if($drop_database["dbs_dropped"]>0){
 		?>
 		<p class="bg-success">Database dropped successfully!</p>
@@ -95,7 +95,7 @@ if($_SESSION["host_address"]!==''){
               <tbody>
 				<?php
                 $databases = r\dbList()->run($conn);
-                $databases = $databases->toNative();
+                //$databases = $databases->toNative();
                 foreach($databases as $database){
                 ?>
                 <tr>
