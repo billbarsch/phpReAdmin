@@ -19,6 +19,8 @@ phpMyAdmin for Rethinkdb
 ###Creator:###
 billbarsch@gmail.com
 
+###TODO###
+Find some way to convert json datetime values to RethinkDB datetime format and vice versa. 
 
 <a href='http://postimg.org/image/5v6w3k1v7/' target='_blank'><img src='http://s29.postimg.org/5v6w3k1v7/php_Re_Admin_1.png' border='0' alt="php Re Admin 1" /></a><br /><br />
 <a href='http://postimg.org/image/f492doar7/' target='_blank'><img src='http://s29.postimg.org/f492doar7/php_Re_Admin_2.png' border='0' alt="php Re Admin 2" /></a><br /><br />
