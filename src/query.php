@@ -96,12 +96,16 @@ if(($_REQUEST["action"]=="run")){
 			}
 			
 			$header = [];
-			foreach ($resultArray as $row) {
-				$header = array_keys((array)$row)+ $header;
+			$resultArrayTables = $resultArray;
+			if(is_array($resultArray)){
+				foreach ($resultArray as $row) {
+					$header = array_keys((array)$row) + $header;
+				}
+			}else{
+				$header = array_keys((array)$resultArray);
+				$resultArrayTables = [0=>$resultArray];
 			}
-			?>
-			
-			
+			?>			
 			<ul class="nav nav-tabs">
 			  <li class="active"><a data-toggle="tab" href="#home">Json</a></li>
 			  <li><a data-toggle="tab" href="#menu1">Table</a></li>
@@ -124,7 +128,7 @@ if(($_REQUEST["action"]=="run")){
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($resultArray as $row) { ?>
+						<?php foreach ($resultArrayTables as $row) { ?>
 						<tr>
 							<?php foreach ($header as $key) {
 								?><td title="<?php echo $key?>"><?php 
@@ -147,7 +151,7 @@ if(($_REQUEST["action"]=="run")){
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($resultArray as $row) { ?>
+						<?php foreach ($resultArrayTables as $row) { ?>
 						<tr>
 							<?php foreach ($header as $key) {
 								?><td title="<?php echo $key?>"><?php 
