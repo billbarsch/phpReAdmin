@@ -85,13 +85,82 @@ if(($_REQUEST["action"]=="run")){
 			if(is_a($result,"ArrayObject")){
 				$resultArray = $result;
 			}else{
-				foreach ($result as $value) {
-					$resultArray[] = $value; 
+				if(is_array($result)||is_object($result)){
+					foreach ($result as $value) {
+						$resultArray[] = $value; 
+					}
+				}
+				else{
+					$resultArray = $result;
 				}
 			}
+			
+			$header = [];
+			foreach ($resultArray as $row) {
+				$header = array_keys((array)$row)+ $header;
+			}
 			?>
-			<pre><?php echo json_encode($resultArray,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);?></pre>
-			<?php
+			
+			
+			<ul class="nav nav-tabs">
+			  <li class="active"><a data-toggle="tab" href="#home">Json</a></li>
+			  <li><a data-toggle="tab" href="#menu1">Table</a></li>
+			  <li><a data-toggle="tab" href="#menu2">Table + Json</a></li>
+			</ul>
+			
+			<div class="tab-content">
+			  <div id="home" class="tab-pane fade in active">
+			    <h3>Json</h3>
+				<pre><?php echo json_encode($resultArray,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);?></pre>
+			  </div>
+			  <div id="menu1" class="tab-pane fade">
+			    <h3>Table</h3>
+				<table class="table table-bordered table-condensed table-hover">
+					<thead>
+						<tr>
+							<?php foreach ($header as $key) {
+								?><th><?php echo $key;?></th><?php
+							} ?>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($resultArray as $row) { ?>
+						<tr>
+							<?php foreach ($header as $key) {
+								?><td title="<?php echo $key?>"><?php 
+								if(!empty($row[$key]))
+								 echo json_encode($row[$key],JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);?></td><?php
+							} ?>
+						</tr>
+						<?php } ?>
+					</tbody>				
+				</table>
+			  </div>
+			  <div id="menu2" class="tab-pane fade">
+			    <h3>Table + Json</h3>
+				<table class="table table-bordered table-condensed table-hover">
+					<thead>
+						<tr>
+							<?php foreach ($header as $key) {
+								?><th><?php echo $key;?></th><?php
+							} ?>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($resultArray as $row) { ?>
+						<tr>
+							<?php foreach ($header as $key) {
+								?><td title="<?php echo $key?>"><?php 
+								if(!empty($row[$key]))
+								 echo "<pre>".json_encode($row[$key],JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)."</pre>";?></td><?php
+							} ?>
+						</tr>
+						<?php } ?>
+					</tbody>				
+				</table>
+			  </div>
+			</div>
+			<?php			
 		}
     } catch (Exception $e) {
 		echo $e;
