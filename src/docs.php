@@ -14,6 +14,11 @@ if($_REQUEST["action"]=="delete_doc"){
     }
 }
 ?>
+<style>
+	#jsonArea:focus{
+		min-height: 250px;
+	}
+</style>
          <h1 class="page-header"><?php echo $_REQUEST["database"];?>/<?php echo $_REQUEST["table"];?>/Docs</h1>
           <!-- <h2 class="sub-header"></h2> -->
           <a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=new" class="btn btn-primary" role="button">+ new doc</a>
@@ -42,14 +47,15 @@ if($_REQUEST["action"]=="delete_doc"){
                 $docs = r\db($_REQUEST["database"])->table($_REQUEST["table"])->run($conn);
 				//$docs = $docs->toNative();
                 foreach($docs as $doc){
-					$doc = first_keys($doc);
-                	$doc_text = json_encode($doc,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-					$doc_text = substr(str_replace('"{..}"','{..}',$doc_text),0,100);
+					//$doc = first_keys($doc);
+                	$doc_text = json_encode($doc,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+					//$doc_text = substr(str_replace('"{..}"','{..}',$doc_text),0,100);
+					//$doc_text = str_replace('"{..}"','{..}',$doc_text);
 					?>
 	                <tr>
-	                  <td><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php echo $doc["id"];?>"><?php echo $doc_text;?></a></td>
-	                  <td><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php echo $doc["id"];?>&action=delete_doc" class="btn btn-danger" role="button">delete</a></td>
-	                  <td></td>
+	                  <td width="50px"><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php echo $doc["id"];?>" class="btn btn-info" role="button">Edit</a></td>
+	                  <td><textarea id="jsonArea" class="form-control"><?php echo $doc_text;?></textarea></td>
+	                  <td width="50px"><a href="<?php echo $_SERVER['PHP_SELF'];?>?database=<?php echo $_REQUEST["database"];?>&table=<?php echo $_REQUEST["table"];?>&doc=<?php echo $doc["id"];?>&action=delete_doc" class="btn btn-danger" role="button">delete</a></td>
 	                </tr>
 	                <?php
                 }//each doc
